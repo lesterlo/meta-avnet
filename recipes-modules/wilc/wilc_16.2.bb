@@ -7,13 +7,15 @@ inherit module
 
 COMPATIBLE_MACHINE = "u96v2-sbc"
 
-SRC_URI = "git://github.com/linux4sam/linux-at91.git;protocol=http;branch=${BRANCH};subpath=drivers/net/wireless/microchip/wilc1000 \
-           file://0001-ultra96-modifications-16.2.patch \
-           "
-
-# Tag: linux4microchip-2024.10
-SRCREV = "edf7a3813f9a6d34aea1f5f79d512e8ba4e1e9f2"
+SRCREV = "7b4f29c2562906444271aecb8ed622f3dce0cb0c"
 BRANCH = "linux-6.6-mchp"
+
+SRC_URI = "git://github.com/linux4sam/linux-at91.git;protocol=http;branch=${BRANCH};subpath=drivers/net/wireless/microchip/wilc1000 \
+           "
+#           file://0001-modifications-for-16.2.patch \
+#
+
+
 
 DEPENDS += "virtual/kernel"
 
