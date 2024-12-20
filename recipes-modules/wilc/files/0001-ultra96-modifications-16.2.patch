@@ -1,20 +1,22 @@
-From 8f85c0af6b812e7533417f34344d8b4ec817b5ef Mon Sep 17 00:00:00 2001
+From 70facf4f3c85b3ad93d09b74224b815e51840cee Mon Sep 17 00:00:00 2001
 From: Marven Gilhespie <mgilhespie@witekio.com>
-Date: Wed, 4 Dec 2024 09:51:31 +0000
+Date: Fri, 20 Dec 2024 18:03:56 +0000
 Subject: [PATCH] ultra96-modifications-16.2
 
+Signed-off-by: Marven Gilhespie <mgilhespie@witekio.com>
 ---
  Kconfig    |  1 +
  Makefile   | 14 +++++++++++++-
  cfg80211.c | 20 +++++++++++++++++++-
  debugfs.h  | 16 ++++++++++++++++
+ mon.c      |  4 ++--
  netdev.c   | 11 ++++++++++-
  netdev.h   |  1 +
  power.c    |  9 +++++++++
  sdio.c     |  5 +++--
  wlan.c     |  9 +++++++--
  wlan.h     |  6 ++++--
- 10 files changed, 83 insertions(+), 9 deletions(-)
+ 11 files changed, 85 insertions(+), 11 deletions(-)
 
 diff --git a/Kconfig b/Kconfig
 index 9b8e0a6c950e..ce8fb6f7a4a1 100644
@@ -29,14 +31,14 @@ index 9b8e0a6c950e..ce8fb6f7a4a1 100644
  	help
  	  This option enables out-of-band interrupt support for the WILC1000 &
 diff --git a/Makefile b/Makefile
-index 2325038cc913..c50c5bd8bd0b 100644
+index 2325038cc913..d02d3c36a590 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1,5 +1,6 @@
  # SPDX-License-Identifier: GPL-2.0
 -ccflags-y += -I$(src)/ -DWILC_DEBUGFS
 +#ccflags-y += -I$(src)/ -DWILC_DEBUGFS
-++ccflags-y += -I$(src)/
++ccflags-y += -I$(src)/
  
  wilc-objs := cfg80211.o netdev.o mon.o \
  			hif.o wlan_cfg.o wlan.o sysfs.o power.o bt.o debugfs.o wilcs02_loopback.o
@@ -163,6 +165,25 @@ index 13b0e40d568c..1402e146aa8a 100644
  
  #ifdef WILC_DEBUGFS
  int wilc_debugfs_init(void);
+diff --git a/mon.c b/mon.c
+index 47948a2c6d48..0f892a89a3bc 100644
+--- a/mon.c
++++ b/mon.c
+@@ -7,12 +7,12 @@
+ #include "cfg80211.h"
+ 
+ struct wilc_wfi_radiotap_hdr {
+-	struct ieee80211_radiotap_header_fixed hdr;
++	struct ieee80211_radiotap_header hdr;
+ 	u8 rate;
+ } __packed;
+ 
+ struct wilc_wfi_radiotap_cb_hdr {
+-	struct ieee80211_radiotap_header_fixed hdr;
++	struct ieee80211_radiotap_header hdr;
+ 	u8 rate;
+ 	u8 dump;
+ 	u16 tx_flags;
 diff --git a/netdev.c b/netdev.c
 index 4e8e1e4eddc0..711e6211c3ee 100644
 --- a/netdev.c
